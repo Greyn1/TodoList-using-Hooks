@@ -5,6 +5,7 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import TodoList from './TodoList';
+import TodoForm from './TodoForm';
 
 /* TodoApp
  -TodoForm
@@ -18,6 +19,9 @@ function TodoApp(props) {
         {id:3,task:"start MERN stck project",completed:false}
     ];
     const [todos, setTodos] = useState(initialTodos);
+    const addTodo = (newTodo) => {
+        setTodos([...todos,{id:4, task:newTodo, completed:false}]);
+    };
     return (
         <Paper style={{
             padding: 0,
@@ -31,6 +35,7 @@ function TodoApp(props) {
                     <Typography color='inherit'>TODOS WITH HOOKS</Typography>
                 </Toolbar>
             </AppBar>
+            <TodoForm addTodo={addTodo} />
             <TodoList todos={todos} />
         </Paper>
     );

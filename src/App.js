@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
-import './App.css';
+import React from 'react';
+import TodoApp from './TodoApp';
 
-class App extends Component {
-  render() {
-    return (
-      <div className='App'>
-        <h1>Todo app using Hooks!</h1>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div>
+      <TodoApp />
+    </div>
+  );
 }
 
 export default App;

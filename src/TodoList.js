@@ -14,7 +14,8 @@ function TodoList(props) {
                          completed={todo.completed} 
                          id={todo.id} 
                          removeTodo={props.removeTodo}
-                         toggle={props.toggle} />
+                         toggleCheckBox={props.toggleCheckBox}
+                         editTodo={props.editTodo} />
                         <Divider />
                     </>
                 ))}

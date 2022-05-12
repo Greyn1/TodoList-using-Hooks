@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import TodoForm from './TodoForm';
+import TodoList from './TodoList';
+import { v4 as uuidv4 } from 'uuid';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import TodoList from './TodoList';
-import TodoForm from './TodoForm';
 
 /* TodoApp
  -TodoForm
@@ -18,10 +19,23 @@ function TodoApp(props) {
         { id: 2, task: "start hash maps", completed: true },
         { id: 3, task: "start MERN stck project", completed: false }
     ];
+
     const [todos, setTodos] = useState(initialTodos);
+
     const addTodo = (newTodo) => {
-        setTodos([...todos, { id: 4, task: newTodo, completed: false }]);
+        setTodos([...todos, { id: uuidv4(), task: newTodo, completed: false }]);
     };
+
+    const removeTodo = (id) => {
+        const updatedTodos = todos.filter(todo => todo.id !== id);
+        setTodos(updatedTodos);
+    }
+
+    const toggleCompletion = id => {
+        const updatedTodos = todos.map(todo => todo.id === id ? {...todo, completed:!todo.completed} : todo);
+        setTodos(updatedTodos);
+    }
+
     return (
         <Paper style={{
             padding: 0,
@@ -38,7 +52,7 @@ function TodoApp(props) {
             <Grid container justifyContent="center" style={{marginTop:'1rem'}} >
                 <Grid item xs={11} md={8} lg={4} >
                     <TodoForm addTodo={addTodo} />
-                    <TodoList todos={todos} />
+                    <TodoList todos={todos} removeTodo={removeTodo} toggle={toggleCompletion} />
                 </Grid>
             </Grid>
         </Paper>
